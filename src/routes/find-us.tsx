@@ -65,7 +65,7 @@ export default function FindUs() {
                     class="location-map"
                     src={embedMapUrl()}
                     title={`${location.venue} map`}
-                    loading="lazy"
+                    loading="eager"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 )}
