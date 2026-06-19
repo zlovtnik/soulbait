@@ -1,0 +1,9 @@
+.lighthouseci
+.cache
+.nitro
+.output
+dist
+node_modules
+bun.lock
+app.config.timestamp_*.js
+public/images
