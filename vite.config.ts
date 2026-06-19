@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     solidStart({ middleware: "./src/middleware.ts" }),
     nitro({
-      preset: "static",
+      preset: "cloudflare-module",
       prerender: {
         crawlLinks: false,
         failOnError: true,
