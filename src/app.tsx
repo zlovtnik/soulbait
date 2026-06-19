@@ -8,7 +8,7 @@ import "./app.css";
 export default function App() {
   return (
     <Router
-      root={props => (
+      root={(props) => (
         <MetaProvider>
           <Layout>
             <Suspense>{props.children}</Suspense>

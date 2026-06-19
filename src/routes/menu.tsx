@@ -4,9 +4,9 @@ import { PageSeo } from "~/components/Seo";
 import { menuItems, originOrder, siteConfig } from "~/content/site";
 
 export default function Menu() {
-  const sections = originOrder.map(origin => ({
+  const sections = originOrder.map((origin) => ({
     origin,
-    items: menuItems.filter(item => item.origin === origin)
+    items: menuItems.filter((item) => item.origin === origin)
   }));
 
   return (
@@ -35,22 +35,24 @@ export default function Menu() {
 
       <section class="section menu-sections" aria-label="Soulbait menu categories">
         <For each={sections}>
-          {section => (
+          {(section) => (
             <div class="menu-section-group">
               <div class="section-heading inline">
                 <p class="section-kicker">{section.origin}</p>
-                <h2>{section.origin === "Soulbait" ? "Truck specials" : `${section.origin} influence`}</h2>
+                <h2>
+                  {section.origin === "Soulbait" ? "Truck specials" : `${section.origin} influence`}
+                </h2>
               </div>
               <div class="card-grid two-up">
                 <For each={section.items}>
-                  {item => (
+                  {(item) => (
                     <article class={`menu-card origin-${item.origin.toLowerCase()}`}>
                       <p class="menu-origin">{item.origin}</p>
                       <h3>{item.name}</h3>
                       <p>{item.description}</p>
-                      <div class="menu-tags" aria-label={`${item.name} tags`}>
-                        <For each={item.tags}>{tag => <span>{tag}</span>}</For>
-                      </div>
+                      <ul class="menu-tags">
+                        <For each={item.tags}>{(tag) => <li>{tag}</li>}</For>
+                      </ul>
                       <div class="menu-footer">
                         <span>{item.price}</span>
                         <span>{item.seasonal ? siteConfig.seasonLabel : "All season"}</span>

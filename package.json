@@ -6,8 +6,17 @@
     "dev": "vite dev",
     "build": "vite build",
     "check": "tsc --noEmit",
+    "lint": "bun eslint .",
+    "format": "bun prettier --write .",
+    "format:check": "bun prettier --check .",
+    "validate:html": "bun run scripts/validate-html.ts",
+    "audit:lighthouse": "bun run scripts/run-lighthouse.ts",
+    "chrome:install": "bun browsers install chrome@stable --path .cache/browser",
+    "size": "bun run scripts/check-size-budget.ts",
+    "verify": "bun run check && bun run lint && bun run format:check && bun run build && bun run validate:html && bun run size && bun run audit:lighthouse",
     "start": "vite preview",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "@solidjs/meta": "^0.29.4",
@@ -21,7 +30,26 @@
     "bun": ">=1.3.11"
   },
   "devDependencies": {
+    "@eslint/js": "^9",
+    "@lhci/cli": "^0.15.1",
+    "@puppeteer/browsers": "^3.0.4",
     "@types/node": "^26.0.0",
-    "typescript": "^6.0.3"
+    "eslint": "^9",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-solid": "^0.14.5",
+    "globals": "^17.6.0",
+    "html-validate": "^11.5.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,cjs,mjs}": [
+      "bun eslint --fix",
+      "bun prettier --write"
+    ],
+    "*.{css,json,md,yml,yaml}": "bun prettier --write"
   }
 }

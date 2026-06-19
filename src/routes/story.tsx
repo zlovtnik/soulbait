@@ -19,15 +19,23 @@ export default function Story() {
             citrus, and a menu tight enough to serve a moving line.
           </p>
         </div>
-        <img
-          src={siteConfig.heroImage}
-          alt="Soulbait waterfront food truck with customers during golden hour"
-        />
+        <picture class="story-picture">
+          <source srcset={siteConfig.heroImage.avif} type="image/avif" />
+          <source srcset={siteConfig.heroImage.webp} type="image/webp" />
+          <img
+            src={siteConfig.heroImage.jpeg}
+            width={siteConfig.heroImage.width}
+            height={siteConfig.heroImage.height}
+            alt="Soulbait waterfront food truck with customers during golden hour"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
       </section>
 
       <section class="section card-grid three-up" aria-label="Soulbait story highlights">
         <For each={storyHighlights}>
-          {highlight => (
+          {(highlight) => (
             <article class="story-card">
               <h2>{highlight.title}</h2>
               <p>{highlight.body}</p>
@@ -41,8 +49,8 @@ export default function Story() {
         <h2 id="seasonal-marketing-title">The marketing follows the season.</h2>
         <p>
           The public site keeps search traffic, menu intent, location intent, and catering intent in
-          one place. The editable content file lets the business swap dishes, stops, CTAs, and summer
-          messaging quickly without changing the component structure.
+          one place. The editable content file lets the business swap dishes, stops, CTAs, and
+          summer messaging quickly without changing the component structure.
         </p>
       </section>
     </>

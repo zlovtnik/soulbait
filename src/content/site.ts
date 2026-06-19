@@ -24,6 +24,14 @@ export interface SocialUpdate {
   enabled: boolean;
 }
 
+export interface HeroImageSources {
+  avif: string;
+  webp: string;
+  jpeg: string;
+  width: number;
+  height: number;
+}
+
 export interface SiteConfig {
   name: string;
   tagline: string;
@@ -31,7 +39,7 @@ export interface SiteConfig {
   city: string;
   region: string;
   siteUrl: string;
-  heroImage: string;
+  heroImage: HeroImageSources;
   phone: string;
   email: string;
   ctas: {
@@ -84,7 +92,13 @@ export const siteConfig: SiteConfig = {
   city: "Portland",
   region: "Maine",
   siteUrl: "https://soulbaitme.com",
-  heroImage: "/images/soulbait-waterfront-truck.png",
+  heroImage: {
+    avif: "/images/soulbait-waterfront-truck.avif",
+    webp: "/images/soulbait-waterfront-truck.webp",
+    jpeg: "/images/soulbait-waterfront-truck.jpg",
+    width: 1672,
+    height: 941
+  },
   phone: "(207) 555-0186",
   email: "hello@soulbaitme.com",
   ctas: {
@@ -111,7 +125,7 @@ export const siteConfig: SiteConfig = {
     defaultTitle: "Soulbait | Portland Maine Seasonal Food Truck",
     description:
       "Soulbait is a seasonal Portland, Maine food truck serving Maine seafood with Haitian heat and Latin soul. Find today's truck, full menu, waterfront hours, and catering.",
-    ogImage: "/images/soulbait-waterfront-truck.png",
+    ogImage: "/images/soulbait-waterfront-truck.jpg",
     keywords: [
       "Portland Maine food truck",
       "best Portland Maine seafood truck",
@@ -242,7 +256,8 @@ export const locationSlots: LocationSlot[] = [
     schedule: "Friday - Sunday",
     hours: "11:00 AM - 8:00 PM",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Old+Port+Wharf+Portland+ME",
-    embedMapUrl: "https://www.google.com/maps?q=Commercial%20Street%20waterfront%20Portland%20ME&output=embed",
+    embedMapUrl:
+      "https://www.google.com/maps?q=Commercial%20Street%20waterfront%20Portland%20ME&output=embed",
     status: "active"
   },
   {
@@ -292,18 +307,15 @@ export const socialUpdates: SocialUpdate[] = [];
 export const storyHighlights = [
   {
     title: "Built for Portland summer",
-    body:
-      "Soulbait is designed around a short, high-energy Maine season: clear locations, quick service, and dishes that make waterfront lunch feel like an event."
+    body: "Soulbait is designed around a short, high-energy Maine season: clear locations, quick service, and dishes that make waterfront lunch feel like an event."
   },
   {
     title: "One window, three foodways",
-    body:
-      "The menu ties Maine seafood to Haitian epis, pikliz, and griot technique, then finishes with Latin citrus, sofrito, herbs, and street-food structure."
+    body: "The menu ties Maine seafood to Haitian epis, pikliz, and griot technique, then finishes with Latin citrus, sofrito, herbs, and street-food structure."
   },
   {
     title: "Fresh enough to stay flexible",
-    body:
-      "The board changes with weather, catch, and event demand, so the site makes the seasonal lineup easy to update from one typed content file."
+    body: "The board changes with weather, catch, and event demand, so the site makes the seasonal lineup easy to update from one typed content file."
   }
 ];
 
@@ -314,7 +326,8 @@ export const cateringOptions = [
   },
   {
     name: "Full Truck Service",
-    detail: "The truck on site with a focused menu, service window, and optional late-day limeade bar."
+    detail:
+      "The truck on site with a focused menu, service window, and optional late-day limeade bar."
   },
   {
     name: "Festival Lineup",

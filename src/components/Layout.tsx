@@ -17,7 +17,7 @@ export default function Layout(props: ParentProps) {
         </A>
         <nav class="main-nav" aria-label="Primary navigation">
           <For each={navItems}>
-            {item => (
+            {(item) => (
               <A href={item.href} activeClass="is-active">
                 {item.label}
               </A>

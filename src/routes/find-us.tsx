@@ -3,8 +3,8 @@ import { PageSeo } from "~/components/Seo";
 import { locationSlots, reviewLinks, siteConfig, socialUpdates } from "~/content/site";
 
 export default function FindUs() {
-  const configuredReviewLinks = reviewLinks.filter(link => link.enabled && link.url);
-  const configuredSocialUpdates = socialUpdates.filter(update => update.enabled && update.url);
+  const configuredReviewLinks = reviewLinks.filter((link) => link.enabled && link.url);
+  const configuredSocialUpdates = socialUpdates.filter((update) => update.enabled && update.url);
 
   return (
     <>
@@ -17,8 +17,9 @@ export default function FindUs() {
         <p class="eyebrow">Where we are</p>
         <h1 id="find-title">Follow the line to the waterfront.</h1>
         <p>
-          Soulbait is seasonal and weather-aware. These are the anchor stops for {siteConfig.seasonLabel};
-          social profiles carry same-day sellouts, weather moves, and bonus stops.
+          Soulbait is seasonal and weather-aware. These are the anchor stops for{" "}
+          {siteConfig.seasonLabel}; social profiles carry same-day sellouts, weather moves, and
+          bonus stops.
         </p>
         <div class="hero-actions page-actions">
           <a
@@ -37,10 +38,12 @@ export default function FindUs() {
 
       <section class="section location-list" aria-label="Soulbait locations and hours">
         <For each={locationSlots}>
-          {location => (
+          {(location) => (
             <article class={`location-row${location.embedMapUrl ? " has-map" : ""}`}>
               <div class="location-copy">
-                <p class="section-kicker">{location.status === "private" ? "Booking" : "Truck stop"}</p>
+                <p class="section-kicker">
+                  {location.status === "private" ? "Booking" : "Truck stop"}
+                </p>
                 <h2>{location.venue}</h2>
                 <p>{location.area}</p>
                 <address>{location.address}</address>
@@ -57,7 +60,7 @@ export default function FindUs() {
                 </a>
               </div>
               <Show when={location.embedMapUrl}>
-                {embedMapUrl => (
+                {(embedMapUrl) => (
                   <iframe
                     class="location-map"
                     src={embedMapUrl()}
@@ -102,7 +105,7 @@ export default function FindUs() {
         <Show when={configuredSocialUpdates.length > 0}>
           <div class="social-feed-preview" aria-label="Recent social update links">
             <For each={configuredSocialUpdates}>
-              {update => (
+              {(update) => (
                 <a href={update.url} target="_blank" rel="noreferrer">
                   <span>{update.platform}</span>
                   <strong>{update.title}</strong>
@@ -122,7 +125,7 @@ export default function FindUs() {
           </div>
           <div class="review-link-list">
             <For each={configuredReviewLinks}>
-              {link => (
+              {(link) => (
                 <a href={link.url} target="_blank" rel="noreferrer">
                   <span>{link.platform}</span>
                   <strong>{link.label}</strong>

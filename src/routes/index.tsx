@@ -11,10 +11,10 @@ import {
 } from "~/content/site";
 
 export default function Home() {
-  const featuredItems = menuItems.filter(item => item.featured);
-  const activeLocations = locationSlots.filter(location => location.status === "active");
-  const configuredReviewLinks = reviewLinks.filter(link => link.enabled && link.url);
-  const configuredSocialUpdates = socialUpdates.filter(update => update.enabled && update.url);
+  const featuredItems = menuItems.filter((item) => item.featured);
+  const activeLocations = locationSlots.filter((location) => location.status === "active");
+  const configuredReviewLinks = reviewLinks.filter((link) => link.enabled && link.url);
+  const configuredSocialUpdates = socialUpdates.filter((update) => update.enabled && update.url);
 
   return (
     <>
@@ -22,18 +22,26 @@ export default function Home() {
       <LocalBusinessJsonLd />
 
       <section class="hero" aria-labelledby="home-title">
-        <img
-          class="hero-image"
-          src={siteConfig.heroImage}
-          alt="Soulbait food truck serving customers on the Portland waterfront"
-        />
+        <picture class="hero-picture">
+          <source srcset={siteConfig.heroImage.avif} type="image/avif" />
+          <source srcset={siteConfig.heroImage.webp} type="image/webp" />
+          <img
+            class="hero-image"
+            src={siteConfig.heroImage.jpeg}
+            width={siteConfig.heroImage.width}
+            height={siteConfig.heroImage.height}
+            alt="Soulbait food truck serving customers on the Portland waterfront"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
         <div class="hero-shade" aria-hidden="true" />
         <div class="hero-content">
           <p class="eyebrow">Open seasonally on the Portland waterfront</p>
           <h1 id="home-title">{siteConfig.tagline}</h1>
           <p class="hero-copy">
-            Fresh Maine seafood, Haitian epis heat, and Latin street-food energy from one summer truck.
-            Check the board, find the window, and catch us before the sun drops.
+            Fresh Maine seafood, Haitian epis heat, and Latin street-food energy from one summer
+            truck. Check the board, find the window, and catch us before the sun drops.
           </p>
           <div class="hero-actions">
             <A class="button button-primary" href={siteConfig.ctas.primaryHref}>
@@ -66,7 +74,7 @@ export default function Home() {
 
       <section class="culture-strip" aria-label="Soulbait food influences">
         <For each={culturePillars}>
-          {pillar => (
+          {(pillar) => (
             <article>
               <p class="culture-marker">{pillar.marker}</p>
               <h2>{pillar.label}</h2>
@@ -84,14 +92,14 @@ export default function Home() {
         </div>
         <div class="card-grid three-up">
           <For each={featuredItems}>
-            {item => (
+            {(item) => (
               <article class={`menu-card origin-${item.origin.toLowerCase()}`}>
                 <p class="menu-origin">{item.origin}</p>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <div class="menu-footer">
                   <span>{item.price}</span>
-                  <Show when={item.tags[0]}>{tag => <span>{tag()}</span>}</Show>
+                  <Show when={item.tags[0]}>{(tag) => <span>{tag()}</span>}</Show>
                 </div>
               </article>
             )}
@@ -110,7 +118,7 @@ export default function Home() {
         </div>
         <div class="location-stack">
           <For each={activeLocations}>
-            {location => (
+            {(location) => (
               <a class="location-card" href={location.mapUrl} target="_blank" rel="noreferrer">
                 <span aria-hidden="true">Map</span>
                 <span>
@@ -156,7 +164,7 @@ export default function Home() {
         <Show when={configuredSocialUpdates.length > 0}>
           <div class="social-feed-preview" aria-label="Recent social update links">
             <For each={configuredSocialUpdates}>
-              {update => (
+              {(update) => (
                 <a href={update.url} target="_blank" rel="noreferrer">
                   <span>{update.platform}</span>
                   <strong>{update.title}</strong>
@@ -176,7 +184,7 @@ export default function Home() {
           </div>
           <div class="review-link-list">
             <For each={configuredReviewLinks}>
-              {link => (
+              {(link) => (
                 <a href={link.url} target="_blank" rel="noreferrer">
                   <span>{link.platform}</span>
                   <strong>{link.label}</strong>

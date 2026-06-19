@@ -10,7 +10,9 @@ interface PageSeoProps {
 
 export function PageSeo(props: PageSeoProps) {
   const pageTitle = () =>
-    props.title === siteConfig.seo.defaultTitle ? props.title : `${props.title} | ${siteConfig.name}`;
+    props.title === siteConfig.seo.defaultTitle
+      ? props.title
+      : `${props.title} | ${siteConfig.name}`;
   const description = () => props.description ?? siteConfig.seo.description;
   const canonical = () => new URL(props.path, siteConfig.siteUrl).toString();
   const image = () => new URL(props.image ?? siteConfig.seo.ogImage, siteConfig.siteUrl).toString();
@@ -36,19 +38,19 @@ export function PageSeo(props: PageSeoProps) {
 }
 
 export function LocalBusinessJsonLd() {
-  const activeStops = () => locationSlots.filter(location => location.status === "active");
+  const activeStops = () => locationSlots.filter((location) => location.status === "active");
   const sameAs = () =>
     [
       siteConfig.social.instagram.url,
       siteConfig.social.tiktok.url,
-      ...reviewLinks.filter(link => link.enabled && link.url).map(link => link.url)
+      ...reviewLinks.filter((link) => link.enabled && link.url).map((link) => link.url)
     ].filter(Boolean);
   const json = () => ({
     "@context": "https://schema.org",
     "@type": ["FoodEstablishment", "LocalBusiness"],
     name: siteConfig.name,
     description: siteConfig.seo.description,
-    image: new URL(siteConfig.heroImage, siteConfig.siteUrl).toString(),
+    image: new URL(siteConfig.heroImage.jpeg, siteConfig.siteUrl).toString(),
     url: siteConfig.siteUrl,
     telephone: siteConfig.phone,
     email: siteConfig.email,
@@ -65,7 +67,7 @@ export function LocalBusinessJsonLd() {
       "@type": "City",
       name: `${siteConfig.city}, ${siteConfig.region}`
     },
-    location: activeStops().map(location => ({
+    location: activeStops().map((location) => ({
       "@type": "Place",
       name: location.venue,
       address: location.address,
@@ -74,5 +76,6 @@ export function LocalBusinessJsonLd() {
     sameAs: sameAs()
   });
 
+  // eslint-disable-next-line solid/no-innerhtml -- JSON-LD is generated from typed static site content.
   return <script type="application/ld+json" innerHTML={JSON.stringify(json())} />;
 }
