@@ -1,5 +1,28 @@
 export type MenuOrigin = "Maine" | "Haiti" | "Latin" | "Soulbait";
 export type MenuTag = "Fan favorite" | "Spicy" | "New" | "Seasonal" | "Catering";
+export type ReviewPlatform = "Yelp" | "Google" | "Instagram";
+export type SocialPlatform = "Instagram" | "TikTok";
+
+export interface SocialProfile {
+  label: string;
+  handle: string;
+  url: string;
+}
+
+export interface ReviewLink {
+  platform: ReviewPlatform;
+  label: string;
+  url: string;
+  enabled: boolean;
+}
+
+export interface SocialUpdate {
+  platform: SocialPlatform;
+  title: string;
+  detail: string;
+  url: string;
+  enabled: boolean;
+}
 
 export interface SiteConfig {
   name: string;
@@ -20,8 +43,8 @@ export interface SiteConfig {
     cateringHref: string;
   };
   social: {
-    instagram: string;
-    tiktok: string;
+    instagram: SocialProfile;
+    tiktok: SocialProfile;
   };
   seo: {
     defaultTitle: string;
@@ -39,14 +62,18 @@ export interface MenuItem {
   tags: MenuTag[];
   featured: boolean;
   seasonal: boolean;
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface LocationSlot {
   venue: string;
   area: string;
+  address: string;
   schedule: string;
   hours: string;
   mapUrl: string;
+  embedMapUrl?: string;
   status: "active" | "seasonal" | "private";
 }
 
@@ -69,20 +96,31 @@ export const siteConfig: SiteConfig = {
     cateringHref: "/catering"
   },
   social: {
-    instagram: "https://www.instagram.com/",
-    tiktok: "https://www.tiktok.com/"
+    instagram: {
+      label: "Instagram",
+      handle: "@soulbaitme",
+      url: "https://www.instagram.com/soulbaitme/"
+    },
+    tiktok: {
+      label: "TikTok",
+      handle: "@soulbaitme",
+      url: "https://www.tiktok.com/@soulbaitme"
+    }
   },
   seo: {
     defaultTitle: "Soulbait | Portland Maine Seasonal Food Truck",
     description:
-      "Soulbait is a seasonal Portland, Maine food truck serving Maine seafood with Haitian heat and Latin soul. Find today's truck, menu, hours, and catering.",
+      "Soulbait is a seasonal Portland, Maine food truck serving Maine seafood with Haitian heat and Latin soul. Find today's truck, full menu, waterfront hours, and catering.",
     ogImage: "/images/soulbait-waterfront-truck.png",
     keywords: [
       "Portland Maine food truck",
+      "best Portland Maine seafood truck",
       "Maine seafood",
       "Haitian food Portland Maine",
       "Latin food truck",
+      "Portland waterfront food",
       "Old Port food",
+      "food truck catering Portland Maine",
       "seasonal catering Portland"
     ]
   }
@@ -200,28 +238,56 @@ export const locationSlots: LocationSlot[] = [
   {
     venue: "Old Port Wharf",
     area: "Commercial Street waterfront",
+    address: "Commercial Street, Portland, ME 04101",
     schedule: "Friday - Sunday",
     hours: "11:00 AM - 8:00 PM",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Old+Port+Wharf+Portland+ME",
+    embedMapUrl: "https://www.google.com/maps?q=Commercial%20Street%20waterfront%20Portland%20ME&output=embed",
     status: "active"
   },
   {
     venue: "Eastern Prom",
     area: "East End park loop",
+    address: "Eastern Promenade, Portland, ME 04101",
     schedule: "Wednesday - Thursday",
     hours: "12:00 PM - 7:00 PM",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Eastern+Promenade+Portland+ME",
+    embedMapUrl: "https://www.google.com/maps?q=Eastern%20Promenade%20Portland%20ME&output=embed",
     status: "active"
   },
   {
     venue: "Private events",
     area: "Greater Portland",
+    address: "Greater Portland, ME",
     schedule: "Monday - Tuesday",
     hours: "By request",
     mapUrl: "/catering",
     status: "private"
   }
 ];
+
+export const reviewLinks: ReviewLink[] = [
+  {
+    platform: "Yelp",
+    label: "Yelp reviews",
+    url: "",
+    enabled: false
+  },
+  {
+    platform: "Google",
+    label: "Google reviews",
+    url: "",
+    enabled: false
+  },
+  {
+    platform: "Instagram",
+    label: "Tagged guest posts",
+    url: "",
+    enabled: false
+  }
+];
+
+export const socialUpdates: SocialUpdate[] = [];
 
 export const storyHighlights = [
   {

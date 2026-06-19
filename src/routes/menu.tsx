@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { For } from "solid-js";
 import { PageSeo } from "~/components/Seo";
 import { menuItems, originOrder, siteConfig } from "~/content/site";
@@ -12,16 +13,24 @@ export default function Menu() {
     <>
       <PageSeo
         title="Menu"
-        description="Explore the Soulbait seasonal menu: Maine seafood, Haitian heat, Latin soul, and summer food-truck specials in Portland, Maine."
+        description="Explore the full Soulbait seasonal food truck menu in Portland, Maine: Maine seafood, Haitian heat, Latin soul, descriptions, prices, and summer specials."
         path="/menu"
       />
       <section class="page-hero compact" aria-labelledby="menu-title">
         <p class="eyebrow">Seasonal menu</p>
         <h1 id="menu-title">Seafood, heat, citrus, and crunch.</h1>
         <p>
-          This is the code-managed launch board. Prices and dishes can change with the catch, weather,
-          and event schedule from one typed content file.
+          Read the full truck board before you get in line. Every item includes a description,
+          price, and seasonal context for fast mobile ordering.
         </p>
+        <div class="hero-actions page-actions">
+          <A class="button button-primary" href="/find-us">
+            Find today's truck
+          </A>
+          <A class="button button-secondary" href="/catering">
+            Book catering
+          </A>
+        </div>
       </section>
 
       <section class="section menu-sections" aria-label="Soulbait menu categories">
@@ -53,6 +62,25 @@ export default function Menu() {
             </div>
           )}
         </For>
+      </section>
+
+      <section class="section inquiry-panel menu-cta" aria-labelledby="menu-cta-title">
+        <div>
+          <p class="section-kicker">Need the truck?</p>
+          <h2 id="menu-cta-title">Lunch line or private event, start with the menu.</h2>
+          <p>
+            Check today's stop before heading out, or send the menu to your team before booking
+            Soulbait for a Portland-area event.
+          </p>
+        </div>
+        <div class="social-actions">
+          <A class="button button-primary" href={siteConfig.ctas.primaryHref}>
+            {siteConfig.ctas.primaryLabel}
+          </A>
+          <A class="button button-secondary" href={siteConfig.ctas.cateringHref}>
+            {siteConfig.ctas.cateringLabel}
+          </A>
+        </div>
       </section>
     </>
   );

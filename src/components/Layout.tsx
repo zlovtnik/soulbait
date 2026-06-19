@@ -40,8 +40,11 @@ export default function Layout(props: ParentProps) {
           <A href="/menu">Menu</A>
           <A href="/find-us">Find us</A>
           <A href="/catering">Catering</A>
-          <a href={siteConfig.social.instagram} rel="noreferrer" target="_blank">
+          <a href={siteConfig.social.instagram.url} rel="noreferrer" target="_blank">
             Instagram
+          </a>
+          <a href={siteConfig.social.tiktok.url} rel="noreferrer" target="_blank">
+            TikTok
           </a>
         </nav>
       </footer>

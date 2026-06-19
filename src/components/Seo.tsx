@@ -1,5 +1,5 @@
 import { Link, Meta, Title } from "@solidjs/meta";
-import { siteConfig } from "~/content/site";
+import { locationSlots, reviewLinks, siteConfig } from "~/content/site";
 
 interface PageSeoProps {
   title: string;
@@ -36,6 +36,13 @@ export function PageSeo(props: PageSeoProps) {
 }
 
 export function LocalBusinessJsonLd() {
+  const activeStops = () => locationSlots.filter(location => location.status === "active");
+  const sameAs = () =>
+    [
+      siteConfig.social.instagram.url,
+      siteConfig.social.tiktok.url,
+      ...reviewLinks.filter(link => link.enabled && link.url).map(link => link.url)
+    ].filter(Boolean);
   const json = () => ({
     "@context": "https://schema.org",
     "@type": ["FoodEstablishment", "LocalBusiness"],
@@ -47,6 +54,7 @@ export function LocalBusinessJsonLd() {
     email: siteConfig.email,
     priceRange: "$$",
     servesCuisine: ["Maine seafood", "Haitian", "Latin"],
+    hasMenu: new URL("/menu", siteConfig.siteUrl).toString(),
     address: {
       "@type": "PostalAddress",
       addressLocality: siteConfig.city,
@@ -57,7 +65,13 @@ export function LocalBusinessJsonLd() {
       "@type": "City",
       name: `${siteConfig.city}, ${siteConfig.region}`
     },
-    sameAs: [siteConfig.social.instagram, siteConfig.social.tiktok]
+    location: activeStops().map(location => ({
+      "@type": "Place",
+      name: location.venue,
+      address: location.address,
+      url: location.mapUrl
+    })),
+    sameAs: sameAs()
   });
 
   return <script type="application/ld+json" innerHTML={JSON.stringify(json())} />;

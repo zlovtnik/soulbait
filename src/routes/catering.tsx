@@ -10,7 +10,7 @@ export default function Catering() {
     <>
       <PageSeo
         title="Catering"
-        description="Book Soulbait for Portland, Maine waterfront events, office lunches, festivals, and private seasonal catering."
+        description="Book Soulbait food truck catering for Portland, Maine waterfront events, office lunches, festivals, corporate gigs, and private seasonal parties."
         path="/catering"
       />
       <section class="page-hero compact" aria-labelledby="catering-title">
@@ -20,7 +20,7 @@ export default function Catering() {
           Private service is built for warm-weather gatherings, office lunches, festivals, and dockside
           events across Greater Portland.
         </p>
-        <a class="button button-primary" href={mailto()}>
+        <a class="button button-primary" href="#catering-form">
           {siteConfig.ctas.cateringLabel}
         </a>
       </section>
@@ -48,6 +48,64 @@ export default function Catering() {
         <a class="button button-secondary" href={mailto()}>
           Email {siteConfig.email}
         </a>
+      </section>
+
+      <section class="section form-section" aria-labelledby="catering-form-title">
+        <div class="form-intro">
+          <p class="section-kicker">Catering request</p>
+          <h2 id="catering-form-title">Tell us the basics.</h2>
+          <p>
+            This static form opens an email draft with your request details. If your device blocks
+            email forms, use the direct email button below.
+          </p>
+        </div>
+        <form id="catering-form" class="inquiry-form" action={mailto()} method="post" enctype="text/plain">
+          <label>
+            Event date
+            <input name="Event date" type="date" required />
+          </label>
+          <label>
+            Service window
+            <input name="Service window" type="text" placeholder="Example: 12:00 PM - 2:00 PM" required />
+          </label>
+          <label>
+            Guest count
+            <input name="Guest count" type="number" min="1" inputmode="numeric" placeholder="75" required />
+          </label>
+          <label>
+            Event location
+            <input name="Event location" type="text" placeholder="Venue, address, or neighborhood" required />
+          </label>
+          <label>
+            Service type
+            <select name="Service type" required>
+              <option value="">Choose one</option>
+              <For each={cateringOptions}>
+                {option => <option value={option.name}>{option.name}</option>}
+              </For>
+            </select>
+          </label>
+          <label>
+            Contact email
+            <input name="Contact email" type="email" placeholder="you@example.com" required />
+          </label>
+          <label class="full-span">
+            Dietary needs, menu goals, and notes
+            <textarea
+              name="Notes"
+              rows="5"
+              placeholder="Tell us about menu preferences, dietary needs, load-in details, and timing."
+            />
+          </label>
+          <div class="form-actions full-span">
+            <button class="button button-primary" type="submit">
+              Open email request
+            </button>
+            <a class="button button-secondary" href={mailto()}>
+              Email {siteConfig.email}
+            </a>
+          </div>
+        </form>
       </section>
     </>
   );
