@@ -74,6 +74,11 @@ export interface MenuItem {
   imageAlt?: string;
 }
 
+export interface LocationCoordinates {
+  latitude: number;
+  longitude: number;
+}
+
 export interface LocationSlot {
   venue: string;
   area: string;
@@ -82,8 +87,32 @@ export interface LocationSlot {
   hours: string;
   mapUrl: string;
   embedMapUrl?: string;
+  coordinates?: LocationCoordinates;
   status: "active" | "seasonal" | "private";
 }
+
+const formatCoordinates = (coordinates: LocationCoordinates) =>
+  `${coordinates.latitude},${coordinates.longitude}`;
+
+const googleMapUrl = (coordinates: LocationCoordinates) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    formatCoordinates(coordinates)
+  )}`;
+
+const googleMapEmbedUrl = (coordinates: LocationCoordinates, zoom = 16) =>
+  `https://www.google.com/maps?q=${encodeURIComponent(
+    formatCoordinates(coordinates)
+  )}&z=${zoom}&output=embed`;
+
+const maineStatePierCoordinates = {
+  latitude: 43.6570054,
+  longitude: -70.247996
+};
+
+const cutterStreetCoordinates = {
+  latitude: 43.6689881,
+  longitude: -70.2429648
+};
 
 export const siteConfig: SiteConfig = {
   name: "Soulbait",
@@ -250,24 +279,25 @@ export const menuItems: MenuItem[] = [
 
 export const locationSlots: LocationSlot[] = [
   {
-    venue: "Old Port Wharf",
-    area: "Commercial Street waterfront",
-    address: "Commercial Street, Portland, ME 04101",
+    venue: "Maine State Pier",
+    area: "Commercial Street waterfront at Franklin Street",
+    address: "Maine State Pier, Portland, ME 04101",
     schedule: "Friday - Sunday",
     hours: "11:00 AM - 8:00 PM",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=Old+Port+Wharf+Portland+ME",
-    embedMapUrl:
-      "https://www.google.com/maps?q=Commercial%20Street%20waterfront%20Portland%20ME&output=embed",
+    mapUrl: googleMapUrl(maineStatePierCoordinates),
+    embedMapUrl: googleMapEmbedUrl(maineStatePierCoordinates),
+    coordinates: maineStatePierCoordinates,
     status: "active"
   },
   {
-    venue: "Eastern Prom",
-    area: "East End park loop",
-    address: "Eastern Promenade, Portland, ME 04101",
+    venue: "Eastern Prom Food Truck Lot",
+    area: "Cutter Street lot off Eastern Promenade",
+    address: "Cutter Street, Portland, ME 04101",
     schedule: "Wednesday - Thursday",
     hours: "12:00 PM - 7:00 PM",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=Eastern+Promenade+Portland+ME",
-    embedMapUrl: "https://www.google.com/maps?q=Eastern%20Promenade%20Portland%20ME&output=embed",
+    mapUrl: googleMapUrl(cutterStreetCoordinates),
+    embedMapUrl: googleMapEmbedUrl(cutterStreetCoordinates),
+    coordinates: cutterStreetCoordinates,
     status: "active"
   },
   {

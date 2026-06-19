@@ -71,7 +71,14 @@ export function LocalBusinessJsonLd() {
       "@type": "Place",
       name: location.venue,
       address: location.address,
-      url: location.mapUrl
+      url: location.mapUrl,
+      geo: location.coordinates
+        ? {
+            "@type": "GeoCoordinates",
+            latitude: location.coordinates.latitude,
+            longitude: location.coordinates.longitude
+          }
+        : undefined
     })),
     sameAs: sameAs()
   });

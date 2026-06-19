@@ -43,7 +43,8 @@
     "lint-staged": "^17.0.7",
     "prettier": "^3.8.4",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.61.1"
+    "typescript-eslint": "^8.61.1",
+    "wrangler": "^4.103.0"
   },
   "lint-staged": {
     "*.{ts,tsx,js,cjs,mjs}": [
